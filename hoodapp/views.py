@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
+import datetime as dt
 
 # Create your views here.
 def display(request):
@@ -13,3 +14,10 @@ def display(request):
     except:
         message='create neighbourhood'
     return render (request,'home.html',locals())
+def create_profile_view(request):
+    current_user = request.user
+    profile = Profile.objects.filter(user=request.user)
+    if request.method == 'POST':
+            form = ProfileForm(request.POST,request.FILES,instance=current_user.profile)
+        if form.is_valid():
+           form.save()
