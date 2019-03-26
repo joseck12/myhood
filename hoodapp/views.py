@@ -57,3 +57,8 @@ def create_buisiness_view(request):
     else:
         business_form = BusinessForm()
     return render(request,'bizz.html',locals())
+#views to display business
+def business(request):
+    images = Profile.objects.all()
+    business = Business.objects.all()
+    return render (request,'business.html',{"business":business,"images":images})
