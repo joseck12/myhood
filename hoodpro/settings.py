@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 import django_heroku
 import dj_database_url
-from decouple import config
+from decouple import config,csv
 
 MODE=config("MODE", default="dev")
 
@@ -26,14 +26,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')x4k=uv-ag#x)^tc5+i&g^qqr#y6bi4efmi1z=yrkj*&+8c+$$'
+SECRET_KEY = config('SECRET_KEY')
 
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS')
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# SECURITY WARNING: don't() run with debug turned on in production
 
 
 # Application definition
