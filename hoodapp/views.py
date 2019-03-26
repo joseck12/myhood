@@ -36,3 +36,24 @@ def create_post_view(request):
             hoodpro = current_user.profile.hoodpro
             post.save()
         return redirect('display')
+            else:
+        post_form =PostForm()
+    return render(request,'post.html',{"post_form":post_form})
+#views to display posts
+
+
+#views to create business
+def create_buisiness_view(request):
+    current_user = request.user
+    business = Business.objects.filter(hoodpro_id=request.user.profile.hoodpro.id)
+    if request.method == 'POST':
+        business_form = BusinessForm(request.POST, request.FILES)
+        if business_form.is_valid():
+            business = business_form.save(commit=False)
+            business.user = current_user
+            business.profile = current_user.profile
+            business.save()
+        return redirect('business')
+    else:
+        business_form = BusinessForm()
+    return render(request,'bizz.html',locals())
