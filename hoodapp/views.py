@@ -1,7 +1,13 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from .models import Profile,Post,hoodpro,Business
+from django.contrib.auth import authenticate,login
+from .forms import ProfileForm,PostForm,BusinessForm,CommunityForm
+from django.http import HttpResponse
 import datetime as dt
+from django.contrib.auth import authenticate,login
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+@login_required(login_url='/accounts/login/')
 def display(request):
     images = Profile.objects.all()
     try:
@@ -14,21 +20,24 @@ def display(request):
     except:
         message='create neighbourhood'
     return render (request,'home.html',locals())
+
 def create_profile_view(request):
     current_user = request.user
     profile = Profile.objects.filter(user=request.user)
     if request.method == 'POST':
-            form = ProfileForm(request.POST,request.FILES,instance=current_user.profile)
+        form = ProfileForm(request.POST,request.FILES,instance=current_user.profile)
         if form.is_valid():
            form.save()
-        else:
+    else:
         form =ProfileForm()
     return render(request,'profile/profile.html',{"form":form,"profile":profile})
+
+#views to create posts
 def create_post_view(request):
     current_user = request.user
     # post = Post.objects.filter(hoodpro=request.user.profile.hoodpro.id)
     if request.method == 'POST':
-                post_form = PostForm(request.POST, request.FILES)
+        post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
             post = post_form.save(commit=False)
             post.user = current_user
@@ -36,7 +45,7 @@ def create_post_view(request):
             hoodpro = current_user.profile.hoodpro
             post.save()
         return redirect('display')
-            else:
+    else:
         post_form =PostForm()
     return render(request,'post.html',{"post_form":post_form})
 #views to display posts
@@ -57,11 +66,13 @@ def create_buisiness_view(request):
     else:
         business_form = BusinessForm()
     return render(request,'bizz.html',locals())
+
 #views to display business
 def business(request):
     images = Profile.objects.all()
     business = Business.objects.all()
     return render (request,'business.html',{"business":business,"images":images})
+
 #views for creating for creating hoodpro
 def create_community(request, user_id=None):
    current_user = request.user

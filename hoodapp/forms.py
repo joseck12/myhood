@@ -1,8 +1,3 @@
-from django.apps import AppConfig
-
-
-class hoodappConfig(AppConfig):
-    name = 'hoodapp'
 from django import forms
 from .models import Profile,Post,User,Business,hoodpro
 from django.contrib.auth.forms import UserCreationForm

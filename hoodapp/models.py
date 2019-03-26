@@ -22,17 +22,17 @@ def save_profile(sender, instance,**kwargs):
 # Create your models here.
 class hoodpro(models.Model):
     hoodpro_name=models.CharField(max_length = 60)
-    hoodpro_location = models.CharField(max_length = 90)
+    hoodpro_location = models.CharField(max_length = 90) 
     occupants_count=models.CharField(max_length = 70)
     user = models.ForeignKey(User,related_name='hoodpro',null=True)
-
-
+    
+    
     class Meta:
         ordering = ['-id']
-
+ 
     def __str__(self):
         return self.hoodpro_name
-
+    
     def create_hoodpro(self):
         self.save()
 
@@ -55,7 +55,7 @@ class hoodpro(models.Model):
 
 class Location(models.Model):
     location = models.CharField(max_length= 30)
-
+    
     def __str__(self):
         return self.location
 
@@ -67,7 +67,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=70,blank=True)
     hoodpro = models.ForeignKey(hoodpro,null=True)
     location = models.ForeignKey(Location,null=True)
-
+    
     def __str__(self):
         return self.username
 
@@ -96,7 +96,7 @@ class Profile(models.Model):
 
 class Post(models.Model):
     image = models.ImageField(upload_to = 'images/',null=True)
-    hoodpro = models.ForeignKey(hoodpro,related_name='post',null=True)
+    hoodpro = models.ForeignKey(hoodpro,related_name='post',null=True)    
     post = models.CharField(max_length = 30)
     post_description = models.CharField(max_length = 40,blank=True)
     profile = models.ForeignKey(Profile,null=True)
@@ -106,7 +106,7 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-id']
-
+ 
     def __str__(self):
         return self.post
 
@@ -130,18 +130,18 @@ class Post(models.Model):
     def create_post(self):
         self.save()
 
-class Business(models.Model):
+class Business(models.Model):  
     business_name = models.CharField(max_length = 130)
     business_email = models.EmailField(max_length=70,blank=True)
     profile = models.ForeignKey(Profile,null=True)
     hoodpro = models.ForeignKey(hoodpro,null=True)
     user = models.ForeignKey(User,null=True)
     posted_time = models.DateTimeField(auto_now_add=True,null=True)
-    product = models.ImageField(upload_to = 'images/',null=True)
-
+    product = models.ImageField(upload_to = 'images/',null=True) 
+   
     class Meta:
         ordering = ['-id']
-
+ 
     def __str__(self):
         return self.business_name
 
@@ -155,14 +155,19 @@ class Business(models.Model):
         self.save()
 
     def create_business(self):
-        self.save()
+        self.save()   
 
     @classmethod
     def find_business(cls,business_id):
         business = cls.objects.get(id=business_id)
-        return business
-
+        return business                   
+    
     @classmethod
     def search_by_business_name(cls,search_term):
         businesses = cls.objects.filter(business_name__icontains=search_term)
         return businesses
+
+
+   
+
+        

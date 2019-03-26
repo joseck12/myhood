@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class HoodappConfig(AppConfig):
+class hoodappConfig(AppConfig):
     name = 'hoodapp'
