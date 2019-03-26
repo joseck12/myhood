@@ -1,0 +1,29 @@
+{%extends 'registration/base.html'%}
+{% load bootstrap3 %}
+{% block content %}
+<div class="container">
+   <div class="row">
+        <h1><a href='/'>Go Home</a></h1>
+       {% if biznes%}
+       <h2>We Found {{ biznes|length }} business with this name</h2>
+       {% else %}
+       <h2> Found 0 projects for the search term {{message}}</h2>
+       {% endif %}
+   </div>
+   <div class="row">
+       {% if biznes %}
+       {% for business in biznes %}
+       <div class="col-md-4">
+           <div class="card" style="margin-bottom:1vh;">
+               <img class="card-img-top" src="{{business.product.url}}" alt="Card image cap">
+               <div class="card-body">
+                   <h5 class="card-title">Business Name:{{business.business_name}}</h5>
+                   <p class="card-text">Business Email:{{business.business_email}}</p>
+               </div>
+           </div>
+       </div>
+       {% endfor %}
+       {% endif %}
+   </div>
+</div>
+{% endblock %}
