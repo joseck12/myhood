@@ -14,7 +14,11 @@
 {% endblock %}
 </head>
 <div class="well" style="width: 50%;position: relative;left: 20%;margin-top: 100px;">
-
+<form  action="{%url 'community'%}" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+    {% bootstrap_form form %}
+    <input type="submit" class="btn btn-outline-success btn-sm" value="Post">
+</form>
 </div>
    {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
