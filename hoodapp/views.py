@@ -62,3 +62,29 @@ def business(request):
     images = Profile.objects.all()
     business = Business.objects.all()
     return render (request,'business.html',{"business":business,"images":images})
+#views for creating for creating hoodpro
+def create_community(request, user_id=None):
+   current_user = request.user
+   ordering=['-date_posted']
+   if request.method == 'POST':
+       form =CommunityForm(request.POST, request.FILES)
+
+       if form.is_valid():
+           post = form.save(commit=False)
+           post.user = current_user
+           post.save()
+           return redirect('display')
+   else:
+       form = CommunityForm()
+   return render(request, 'community.html', {"form":form})
+#searching for businesses
+def search_results(request):
+    if 'business_name' in request.GET and request.GET['business_name']:
+        search_term = request.GET.get('business_name')
+        search_businesses = Business.search_by_business_name(search_term)
+        message = f"{search_term}"
+        print(search_businesses)
+        return render(request, 'profile/search.html',{"message":message,"biznes":search_businesses})
+    else:
+        message = "you havent seached for any term"
+    return render(request, 'profile/search.html',{"message":message})
