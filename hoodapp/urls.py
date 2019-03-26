@@ -12,4 +12,6 @@ urlpatterns=[
     url(r'^bizz/$', views.create_buisiness_view, name='bizz'),
     url(r'^business/$', views.business, name='business'),
     url(r'^add/$', views.create_community, name='community'),
+    url(r'^search/',views.search_results, name='search_results'),
+
 ]
