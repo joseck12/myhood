@@ -1,0 +1,49 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+{% block content %}
+<h1><a href='/'>Go Home</a></h1>
+<h3 id="p">profile page</h3>
+              <div class="container-fluid row">
+                    {% if request.user.profile.profile_image  %}
+                    <div class="col-md-4">
+                        <div class="card">
+                        <div class="hovereffect" style="background-color:#ffffff">
+                <img class="card-img-top" src="{{request.user.profile.profile_image.url}}" alt="Card image cap" style="height:400px;">
+                                <br><br>
+                            <div>
+                                <div class="card-body">
+                                <h5 style="float:left; font-family: 'Poiret One', cursive;color: #330033;">Username:{{request.user.profile.username}}</h5>
+                                <br>
+                                <h5 style="float:left; font-family: 'Poiret One', cursive;color: #330033;position: relative;right: 35%;">neighbourhood:{{request.user.profile.neighbourhood}}</h5>
+                                <br>
+                                <h5 style="float:left; font-family: 'Poiret One', cursive;color: #330033;">Location:{{request.user.profile.location}}</h5>
+
+                            </div>
+                            </div>
+                            <div class="overlay">
+
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    { {% else %}
+                    {% endif %}
+                    <div class="card" style="width: 50%;background-color:#DDD">
+                            <form action="{%url 'profile' %}" method="post" enctype="multipart/form-data">
+                                {%csrf_token%}
+                                {% bootstrap_form form layout='inline'%}
+                                <input type="submit" class="btn btn-danger btn-lg" value="Post">
+                            </form>
+                            <hr>
+                            <h4><a href="{%url 'post'%}">Make A Post </a></h4>
+                            <h4 style="color: #330033;">Feel Free To Engage with your community by Posting something</h4>
+                         <hr>
+                         <h4><a href="{%url 'bizz' %}">Make A Business Pitch</a></h4></p>
+                         <h4 style="color:#330033;">Share Your Business Ideas</h4>
+                </div>
+
+
+</div>
+{% endblock %}
+</div>
