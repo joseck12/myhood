@@ -3,13 +3,13 @@ h1{
 }
 
 
-#row1{
-    background-image: url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?ixlib=rb-0.3.5&s=2bdb09385e223b27295f922b64d406b2&auto=format&fit=crop&w=1050&q=80");
-    height: 500px;
+.row12{
+    background-image: url("https://iages.unsplash.com/photo-1519608487953-e999c86e7455?ixlib=rb-0.3.5&s=2bdb09385e223b27295f922b64d406b2&auto=format&fit=crop&w=1050&q=80");
+    /* height: 500px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
+    position: relative; */
 }
 @import url('https://fonts.googleapis.com/css?family=Londrina+Outline');
 body {
@@ -38,17 +38,6 @@ body {
         0 0 100px #ff7bac,
         0 0 150px #ff7bac;
 }
-.blue {
-    text-shadow:
-        0 0 5px #7bacff,
-        0 0 10px #7bacff,
-        0 0 20px #7bacff,
-        0 0 40px #7bacff,
-        0 0 80px #7bacff,
-        0 0 90px #7bacff,
-        0 0 100px #7bacff,
-        0 0 150px #7bacff;
-}
 .green {
     text-shadow:
         0 0 5px #7bffce,
@@ -60,14 +49,6 @@ body {
         0 0 100px #7bffce,
         0 0 150px #7bffce;
 }
-#blink-soft {
-    animation: blinker 2.6s linear infinite;
-  }
-  @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
-  }
   #row2{
     background-image: url("https://png.pngtree.com/element_origin_min_pic/16/06/15/165761150d11e20.jpg");
     height: 230px;
@@ -193,8 +174,8 @@ top: 20px;
 }
 
 .hovereffect img {
-    /* display: block; */
-    /* position: relative; */
+    display: block;
+    position: relative;
     -webkit-transition: all 0.4s ease-in;
     transition: all 0.2s ease-in;
 }

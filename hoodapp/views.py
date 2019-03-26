@@ -54,7 +54,7 @@ def create_post_view(request):
 #views to create business
 def create_buisiness_view(request):
     current_user = request.user
-    business = Business.objects.filter(hoodpro_id=request.user.profile.hoodpro.id)
+    business = Business.objects.filter(hoodpro=request.user.profile.hoodpro)
     if request.method == 'POST':
         business_form = BusinessForm(request.POST, request.FILES)
         if business_form.is_valid():
